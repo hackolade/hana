@@ -1,0 +1,40 @@
+{
+	"name": "array",
+	"erdAbbreviation": "<arr>",
+	"dtdAbbreviation": "[...]",
+	"parentType": "array",
+	"useSample": true,
+	"default": true,
+	"hiddenOnEntity": "view",
+	"defaultValues": {
+		"properties": [],
+		"primaryKey": false,
+		"relationshipType": "",
+		"parentRelationship": "",
+		"childRelationships": [],
+		"foreignCollection": "",
+		"foreignField": [],
+		"additionalItems": true,
+		"minItems": "",
+		"maxItems": "",
+		"uniqueItems": false,
+		"length": 1
+	},
+	"subtype": "array",
+	"subtypes": {
+		"array": {
+			"childValueType": [
+				"char",
+				"array",
+				"binary",
+				"boolean",
+				"datetime",
+				"json",
+				"multiset",
+				"number",
+				"rowid",
+				"xml"
+			]
+		}
+	}
+}

@@ -1,0 +1,86 @@
+[
+	{
+		"lowerTab": "Connection",
+		"structure": [
+			{
+				"inputLabel": "Name",
+				"inputKeyword": "name",
+				"inputType": "text",
+				"inputPlaceholder": "Name"
+			},
+			{
+				"inputLabel": "Hostname",
+				"inputKeyword": "host",
+				"description": "Specify the host IP address or DNS name of Db2 server",
+				"inputType": "text",
+				"regex": "([^\\s])"
+			},
+			{
+				"inputLabel": "Port",
+				"inputKeyword": "port",
+				"description": "Specify the port number of Db2 server",
+				"inputType": "numeric",
+				"defaultValue": 50000
+			},
+			{
+				"inputLabel": "Database",
+				"inputKeyword": "database",
+				"description": "Specify the name of the database to connect to",
+				"inputType": "text",
+				"inputPlaceholder": "Database"
+			}
+		]
+	},
+	{
+		"tab": "Authentication",
+		"structure": [
+			{
+				"inputLabel": "Authentication method",
+				"inputKeyword": "authMethod",
+				"inputType": "select",
+				"defaultValue": "Username / Password",
+				"options": [{ "value": "Username / Password", "label": "Username / Password" }],
+				"disabled": true
+			},
+			{
+				"inputLabel": "User Name",
+				"inputKeyword": "userName",
+				"inputType": "text",
+				"inputPlaceholder": "User Name",
+				"dependency": {
+					"key": "authMethod",
+					"value": ["Username / Password"]
+				},
+				"validation": {
+					"regex": "([^\\s])"
+				}
+			},
+			{
+				"inputLabel": "Password",
+				"inputKeyword": "userPassword",
+				"inputType": "password",
+				"inputPlaceholder": "Password",
+				"dependency": {
+					"key": "authMethod",
+					"value": ["Username / Password"]
+				},
+				"isHiddenKey": true,
+				"validation": {
+					"regex": "([^\\s])"
+				}
+			}
+		]
+	},
+	{
+		"tab": "Advanced",
+		"structure": [
+			{
+				"inputLabel": "Java binary path",
+				"inputKeyword": "javaHomePath",
+				"inputType": "file",
+				"inputPlaceholder": "C:Program Files (x86)Javajre-1.8\binjava.exe",
+				"extensions": ["*"]
+			}
+		]
+	}
+]
