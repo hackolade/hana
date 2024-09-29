@@ -117,6 +117,11 @@ making sure that you maintain a proper JSON format.
 		"lowerTab": "Details",
 		"structure": [
 			{
+				"propertyName": "Table ID",
+				"propertyKeyword": "tableID",
+				"propertyType": "text"
+			},
+			{
 				"propertyName": "Comments",
 				"propertyKeyword": "description",
 				"shouldValidate": false,
@@ -129,96 +134,153 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
+				"propertyName": "Table type",
+				"propertyKeyword": "tableType",
+				"propertyTooltip": "Defines the type of table to create.",
+				"propertyType": "select",
+				"options": [
+					"column", 
+					"row", 
+					"virtual",
+					"extended",
+					"collection"
+				]
+			},
+			{
 				"propertyName": "Temporary",
 				"propertyKeyword": "temporary",
-				"propertyType": "checkbox"
-			},
-			{
-				"propertyName": "Auxiliary",
-				"propertyKeyword": "auxiliary",
-				"propertyType": "checkbox"
-			},
-			{
-				"propertyName": "Table",
-				"propertyKeyword": "auxiliaryBaseTable",
-				"propertyTooltip": "Identifies the base table that is to be stored in the auxiliary table.",
-				"propertyType": "selecthashed",
-				"template": "entities",
-				"withEmptyOption": true,
-				"excludeCurrent": true,
-				"dependency": {
-					"key": "auxiliary",
-					"value": true
-				}
-			},
-			{
-				"propertyName": "Column",
-				"propertyKeyword": "auxiliaryBaseColumn",
-				"propertyTooltip": "Identifies the column of base table that is to be stored in the auxiliary table.",
-				"propertyType": "fieldList",
-				"template": "orderedList",
-				"dataToLoad": "auxiliaryBaseTable",
-				"templateOptions": {
-					"maxFields": 1
-				},
-				"dependency": {
-					"key": "auxiliary",
-					"value": true
-				}
-			},
-			{
-				"propertyName": "Append",
-				"propertyKeyword": "auxiliaryAppend",
-				"propertyTooltip": "Specifies whether append processing is used for the table. The APPEND clause must not be specified for a table in a work file table space.",
 				"propertyType": "select",
-				"options": ["", "yes", "no"],
-				"dependency": {
-					"key": "auxiliary",
-					"value": true
-				}
+				"options": [
+					"", 
+					"global", 
+					"local"
+				]
 			},
-
 			{
-				"propertyName": "Part",
-				"propertyKeyword": "auxiliaryPart",
-				"propertyTooltip": "Specifies the partition of the base table for which the auxiliary table is to store the specified column.",
+				"propertyName": "Unload priority",
+				"propertyKeyword": "unload_priority",
 				"propertyType": "numeric",
-				"valueType": "integer",
-				"dependency": {
-					"key": "auxiliary",
-					"value": true
-				}
+				"valueType": "number",
+				"allowNegative": false,
+				"minValue": 0,
+				"maxValue": 9,
+				"step": 1
 			},
 			{
-				"propertyName": "If not exists",
-				"propertyKeyword": "ifNotExist",
-				"propertyTooltip": "Specifies that no error message is shown when the table cannot be created because a table with the specified name already exists in the current database and schema.",
+				"propertyName": "Logging",
+				"propertyKeyword": "logging",
+				"propertyTooltip": "Specifies whether or not logging was on for the table at last restart time",
+				"propertyType": "checkbox"
+			},
+			{
+				"propertyName": "Loadable unit",
+				"propertyKeyword": "load_unit",
+				"propertyTooltip": "Specifies whether or not logging was on for the table at last restart time",
+				"propertyType": "select",
+				"options": [
+					"",
+					"column",
+					"page"
+				]
+			},
+			{
+				"propertyName": "Auto merge",
+				"propertyKeyword": "auto_merge_option",
+				"propertyTooltip": "Specifies that an automatic delta merge is triggered; this is the default.",
 				"propertyType": "checkbox",
 				"defaultValue": true
 			},
 			{
-				"propertyName": "Under super table",
-				"propertyKeyword": "underSuperTable",
-				"propertyType": "group",
-				"groupItemLimit": 1,
-				"propertyTooltip": "Indicates that the table is a subtable of supertable-name.",
-				"structure": [
-					{
-						"propertyName": "Table name",
-						"propertyKeyword": "parentTable",
-						"propertyTooltip": "",
-						"propertyType": "selecthashed",
-						"template": "entities",
-						"withEmptyOption": true,
-						"excludeCurrent": true
-					}
-				]
+				"propertyName": "Public",
+				"propertyKeyword": "public",
+				"propertyTooltip": "Only valid for column store tables",
+				"propertyType": "checkbox",
+				"dependency": {
+					"key": "tableType",
+					"value": "column"
+				}
 			},
 			{
-				"propertyName": "Tablespace",
-				"propertyKeyword": "table_tablespace_name",
-				"propertyTooltip": "Enter the name of an existing tablespace location for the table",
-				"propertyType": "text"
+				"propertyName": "Group option list",
+				"propertyKeyword": "group_option_list",
+				"propertyTooltip": "Specifies the group type, subtype, and name, and whether the table is the leader of the table group.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "As subquery",
+				"propertyKeyword": "as_subquery",
+				"propertyTooltip": "Creates a table and fills it with the data computed by the subquery. For more information about subqueries, see the SELECT statement topic.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "System versioning spec",
+				"propertyKeyword": "system_versioning_spec",
+				"propertyTooltip": "Configures system versioning for a table. System-versioning allows change tracking on database tables.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "App time period spec",
+				"propertyKeyword": "application_time_period_spec",
+				"propertyTooltip": "Creates an application-time period table. This option is only supported for column store tables.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Association clause",
+				"propertyKeyword": "association_clause",
+				"propertyTooltip": "Creates an application-time period table. This option is only supported for column store tables.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Annotation clause",
+				"propertyKeyword": "annotation_clause",
+				"propertyTooltip": "Specifies table-, column-, and parameter-level annotations in the form of key/value pairs. You can reference annotations in subsequent queries to filter results.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Mask clause",
+				"propertyKeyword": "mask_clause",
+				"propertyTooltip": "Adds data masking to the contents of the specified columns. Data masking transforms confidential data so that it appears meaningless to users who don't have the privileges required to view it.",
+				"propertyType": "fieldList",
+				"template": "orderedList"
+			},
+			{
+				"propertyName": "System versioning spec",
+				"propertyKeyword": "system_versioning_spec",
+				"propertyTooltip": "Configures system versioning for a table. System-versioning allows change tracking on database tables.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Partition clause",
+				"propertyKeyword": "partition_clause",
+				"propertyTooltip": "Configures system versioning for a table. System-versioning allows change tracking on database tables.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Persistent memory clause",
+				"propertyKeyword": "persistent_memory_spec_clause",
+				"propertyTooltip": "Enables or disables persistent memory storage preference at the table, range partition, or column level, depending on where the clause is situated in the CREATE statement.",
+				"propertyType": "select",
+				"options": [
+					"", 
+					"on", 
+					"off"
+				]
 			},
 			{
 				"propertyName": "Remarks",

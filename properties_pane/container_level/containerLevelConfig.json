@@ -108,12 +108,6 @@ making sure that you maintain a proper JSON format.
 		"lowerTab": "Details",
 		"structure": [
 			{
-				"propertyName": "Authorization",
-				"propertyKeyword": "authorizationName",
-				"propertyTooltip": "Identifies the user who is the owner of the schema. The value of authorization-name is also used to name the schema if schema name is not specified. The authorization-name must not identify a schema already described in the catalog",
-				"propertyType": "text"
-			},
-			{
 				"propertyName": "Comments",
 				"propertyKeyword": "description",
 				"shouldValidate": false,
@@ -126,11 +120,10 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Data capture",
-				"propertyKeyword": "dataCapture",
-				"propertyTooltip": "Indicates whether extra information for data replication is to be written to the log.",
-				"propertyType": "select",
-				"options": ["", "NONE", "CHANGES"]
+				"propertyName": "Owned by",
+				"propertyKeyword": "ownedBy",
+				"propertyTooltip": "Specifies the name of the schema owner. If omitted, the current user is the owner of the schema.",
+				"propertyType": "text"
 			},
 			{
 				"propertyName": "Remarks",

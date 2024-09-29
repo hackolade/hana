@@ -1,15 +1,15 @@
 {
-    "name": "SAP Hana",
-    "version": "0.2.10",
+    "name": "SAP HANA",
+    "version": "0.2.0",
     "author": "hackolade",
     "engines": {
-        "hackolade": "7.7.9",
+        "hackolade": "7.7.10",
         "hackoladePlugin": "1.2.0"
     },
     "contributes": {
         "target": {
             "applicationTarget": "hana",
-            "title": "SAP Hana",
+            "title": "SAP HANA",
             "versions": [
             ]
         },
@@ -54,7 +54,7 @@
             "discoverRelationships": true
         }
     },
-    "description": "Hackolade plugin for SAP Hana",
+    "description": "Hackolade plugin for SAP HANA",
     "icon_url": "logo.jpg",
     "disabled": false,
     "lint-staged": {

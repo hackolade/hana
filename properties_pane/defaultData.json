@@ -2,7 +2,7 @@
 	"model": {
 		"modelName": "new_model",
 		"dbVersion": "",
-		"dbVendor": "SAP Hana"
+		"dbVendor": "SAP HANA"
 	},
 	"container": {
 		"name": "new_schema"

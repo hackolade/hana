@@ -7,7 +7,7 @@
 	"hiddenOnEntity": "view",
 	"defaultValues": {
 		"primaryKey": false,
-		"mode": "binary",
+		"mode": "varbinary",
 		"length": 10
 	}
 }

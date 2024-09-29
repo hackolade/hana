@@ -61,7 +61,7 @@ making sure that you maintain a proper JSON format.
 				"shouldValidate": false,
 				"propertyTooltip": "DB vendor",
 				"propertyType": "select",
-				"options": ["SAP Hana"],
+				"options": ["SAP HANA"],
 				"disabledOption": true
 			},
 			{
@@ -72,71 +72,6 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "select",
 				"options": [""],
 				"disabledOption": false
-			},
-			{
-				"propertyName": "Database name",
-				"propertyKeyword": "database_name",
-				"propertyTooltip": "Enter the SAP Hana database for this model",
-				"propertyType": "text"
-			},
-			{
-				"propertyName": "Tablespace",
-				"propertyKeyword": "tablespace_name",
-				"propertyTooltip": "Enter the name of an existing tablespace location for the database, or USERSPACE1",
-				"defaultValue": "USERSPACE1",
-				"propertyType": "text"
-			},
-			{
-				"propertyName": "Encoding",
-				"propertyKeyword": "encoding",
-				"propertyTooltip": "Select from list of options",
-				"defaultValue": "UTF-8",
-				"propertyType": "select",
-				"options": ["UTF-8", "UCS-2"]
-			},
-			{
-				"propertyName": "Locale",
-				"propertyKeyword": "locale",
-				"propertyTooltip": "Collation order (LC_COLLATE) to use in the new database. ",
-				"propertyType": "text"
-			},
-			{
-				"propertyName": "Collation",
-				"propertyKeyword": "LC_COLLATE",
-				"propertyTooltip": "Collation order (LC_COLLATE) to use in the new database. ",
-				"propertyType": "text",
-				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "locale",
-							"exists": false
-						},
-						{
-							"key": "locale",
-							"value": ""
-						}
-					]
-				}
-			},
-			{
-				"propertyName": "Character type",
-				"propertyKeyword": "LC_CTYPE",
-				"propertyTooltip": "Character classification (LC_CTYPE) to use in the new database. ",
-				"propertyType": "text",
-				"dependency": {
-					"type": "or",
-					"values": [
-						{
-							"key": "locale",
-							"exists": false
-						},
-						{
-							"key": "locale",
-							"value": ""
-						}
-					]
-				}
 			},
 			{
 				"propertyName": "Comments",
