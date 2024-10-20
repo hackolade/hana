@@ -134,9 +134,17 @@ making sure that you maintain a proper JSON format.
 				"propertyType": "checkbox"
 			},
 			{
-				"propertyName": "As query",
+				"propertyName": "Parameterized view clause",
+				"propertyKeyword": "parameterized_view_clause",
+				"propertyTooltip": "Defines the view columns by using parameters that can take input when queried",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "As subquery",
 				"propertyKeyword": "selectStatement",
-				"propertyTooltip": "A SELECT or VALUES command which will provide the columns and rows of the view.",
+				"propertyTooltip": "The query that forms the definition for the data in the view.",
 				"propertyType": "details",
 				"template": "codeEditor",
 				"templateOptions": {
@@ -145,21 +153,56 @@ making sure that you maintain a proper JSON format.
 				"markdown": false
 			},
 			{
-				"propertyName": "With check option",
-				"propertyKeyword": "withCheckOption",
-				"propertyTooltip": "This clause specifies optional parameters for a view",
-				"propertyType": "checkbox"
+				"propertyName": "Association clause",
+				"propertyKeyword": "with_association_clause",
+				"propertyTooltip": "Defines a relationship between the view and one or more tables (or views, in the case of JOIN).",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
 			},
 			{
-				"propertyName": "Check testing scope",
-				"propertyKeyword": "checkTestingScope",
-				"propertyTooltip": "Specifies the constraint that every row that is inserted or updated through the view must conform to the definition of the view. A row that does not conform to the definition of the view is a row that does not satisfy the search conditions of the view.",
-				"propertyType": "select",
-				"options": ["", "LOCAL", "CASCADED"],
+				"propertyName": "Expression macro list",
+				"propertyKeyword": "expression_macro_list",
+				"propertyTooltip": "Creates one or more expression macros on the view that can be called later by using the EXPRESSION_MACRO function in a query on the view.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Annotation clause",
+				"propertyKeyword": "annotation_clause",
+				"propertyTooltip": "Specifies view-, column-, and parameter-level annotations in the form of key/value pairs. You can reference annotations in subsequent queries to filter results.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Anonymization clause",
+				"propertyKeyword": "anonymization_clause",
+				"propertyTooltip": "Specifies data anonymization parameters for the view and its columns. ",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false,
 				"dependency": {
-					"key": "withCheckOption",
-					"value": true
+					"key": "orReplace",
+					"value": false
 				}
+			},
+			{
+				"propertyName": "Check option clause",
+				"propertyKeyword": "check_option_clause",
+				"propertyTooltip": "Specifies that a user must have an SQL-based analytic privilege to access the view.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Cache clause",
+				"propertyKeyword": "cache_clause",
+				"propertyTooltip": "Controls whether the user can dynamically or statically cache the result of the view and get stale data. A result cache can improve performance for subsequent queries on the view.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
 			},
 			{
 				"propertyName": "Remarks",

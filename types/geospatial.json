@@ -10,16 +10,6 @@
 		"primaryKey": false,
 		"comments": "",
 		"properties": [],
-		"relationshipType": "",
-		"parentRelationship": "",
-		"childRelationships": [],
-		"foreignCollection": "",
-		"foreignField": [],
-		"additionalProperties": false,
-		"subTypes": [
-			{ "name": "PointType", "snippet": "geo-point" },
-			{ "name": "LineStringType", "snippet": "geo-line" },
-			{ "name": "PolygonType", "snippet": "geo-polygon" }
-		]
+		"additionalProperties": false
 	}
 }

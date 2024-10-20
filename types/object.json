@@ -6,22 +6,5 @@
 	"defaultValues": {
 		"subtype": "object",
 		"properties": []
-	},
-	"subtypes": {
-		"object": {
-			"childValueType": [
-				"char",
-				"array",
-				"binary",
-				"boolean",
-				"datetime",
-				"json",
-				"multiset",
-				"number",
-				"rowid",
-				"xml",
-				"object"
-			]
-		}
 	}
 }

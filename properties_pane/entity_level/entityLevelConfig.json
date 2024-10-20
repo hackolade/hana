@@ -147,50 +147,6 @@ making sure that you maintain a proper JSON format.
 				]
 			},
 			{
-				"propertyName": "Temporary",
-				"propertyKeyword": "temporary",
-				"propertyType": "select",
-				"options": [
-					"", 
-					"global", 
-					"local"
-				]
-			},
-			{
-				"propertyName": "Unload priority",
-				"propertyKeyword": "unload_priority",
-				"propertyType": "numeric",
-				"valueType": "number",
-				"allowNegative": false,
-				"minValue": 0,
-				"maxValue": 9,
-				"step": 1
-			},
-			{
-				"propertyName": "Logging",
-				"propertyKeyword": "logging",
-				"propertyTooltip": "Specifies whether or not logging was on for the table at last restart time",
-				"propertyType": "checkbox"
-			},
-			{
-				"propertyName": "Loadable unit",
-				"propertyKeyword": "load_unit",
-				"propertyTooltip": "Specifies whether or not logging was on for the table at last restart time",
-				"propertyType": "select",
-				"options": [
-					"",
-					"column",
-					"page"
-				]
-			},
-			{
-				"propertyName": "Auto merge",
-				"propertyKeyword": "auto_merge_option",
-				"propertyTooltip": "Specifies that an automatic delta merge is triggered; this is the default.",
-				"propertyType": "checkbox",
-				"defaultValue": true
-			},
-			{
 				"propertyName": "Public",
 				"propertyKeyword": "public",
 				"propertyTooltip": "Only valid for column store tables",
@@ -201,12 +157,34 @@ making sure that you maintain a proper JSON format.
 				}
 			},
 			{
-				"propertyName": "Group option list",
-				"propertyKeyword": "group_option_list",
-				"propertyTooltip": "Specifies the group type, subtype, and name, and whether the table is the leader of the table group.",
+				"propertyName": "Temporary",
+				"propertyKeyword": "temporary",
+				"propertyType": "select",
+				"options": [
+					"", 
+					"global", 
+					"local"
+				]
+			},
+			{
+				"propertyName": "Like table clause",
+				"propertyKeyword": "like_table_clause",
+				"propertyTooltip": "To create a table with the same definition as another table, including columns, indexes, and table options. Foreign key definitions, as well as any DATA DIRECTORY or INDEX DIRECTORY table options specified on the original table, will NOT be created.",
+				"propertyType": "selecthashed",
+				"template": "entities",
+				"withEmptyOption": true,
+				"excludeCurrent": true
+			},
+			{
+				"propertyName": "Table creation syntax",
+				"propertyKeyword": "table_creation_syntax",
 				"propertyType": "details",
 				"template": "textarea",
-				"markdown": false
+				"markdown": false,
+				"dependency": {
+					"key": "like_table_clause",
+					"exists": true
+				}
 			},
 			{
 				"propertyName": "As subquery",
@@ -228,6 +206,14 @@ making sure that you maintain a proper JSON format.
 				"propertyName": "App time period spec",
 				"propertyKeyword": "application_time_period_spec",
 				"propertyTooltip": "Creates an application-time period table. This option is only supported for column store tables.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Bi temporal table spec",
+				"propertyKeyword": "bi_temporal_table_spec",
+				"propertyTooltip": "Creates a bi-temporal table, which is a table that has both system-versioning and an application-time period defined on it.",
 				"propertyType": "details",
 				"template": "textarea",
 				"markdown": false
@@ -256,12 +242,27 @@ making sure that you maintain a proper JSON format.
 				"template": "orderedList"
 			},
 			{
-				"propertyName": "System versioning spec",
-				"propertyKeyword": "system_versioning_spec",
-				"propertyTooltip": "Configures system versioning for a table. System-versioning allows change tracking on database tables.",
-				"propertyType": "details",
-				"template": "textarea",
-				"markdown": false
+				"propertyName": "Logging",
+				"propertyKeyword": "logging",
+				"propertyTooltip": "Specifies whether or not logging was on for the table at last restart time",
+				"propertyType": "checkbox"
+			},
+			{
+				"propertyName": "Auto merge",
+				"propertyKeyword": "auto_merge_option",
+				"propertyTooltip": "Specifies that an automatic delta merge is triggered; this is the default.",
+				"propertyType": "checkbox",
+				"defaultValue": true
+			},
+			{
+				"propertyName": "Unload priority",
+				"propertyKeyword": "unload_priority",
+				"propertyType": "numeric",
+				"valueType": "number",
+				"allowNegative": false,
+				"minValue": 0,
+				"maxValue": 9,
+				"step": 1
 			},
 			{
 				"propertyName": "Partition clause",
@@ -280,6 +281,101 @@ making sure that you maintain a proper JSON format.
 					"", 
 					"on", 
 					"off"
+				]
+			},
+			{
+				"propertyName": "Group option list",
+				"propertyKeyword": "group_option_list",
+				"propertyTooltip": "Specifies the group type, subtype, and name, and whether the table is the leader of the table group.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Location clause",
+				"propertyKeyword": "location_clause",
+				"propertyTooltip": "Specifies the index servers on which the partitions are created in a round-robin scheme.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "With replica list",
+				"propertyKeyword": "with_replica_list",
+				"propertyTooltip": "Creates a table replica at the same time the source table is created.  To create a column-wise replica that is based on an existing table, use the LIKE clause",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false,
+				"dependency": {
+					"key": "replica_clause",
+					"exists": true
+				}
+			},
+			{
+				"propertyName": "Global temporary option",
+				"propertyKeyword": "global_temporary_option",
+				"propertyTooltip": "Sets data availability of global temporary tables within session or transaction level.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false,
+				"dependency": {
+					"key": "temporary",
+					"exists": "global"
+				}
+			},
+			{
+				"propertyName": "Unused retention period option",
+				"propertyKeyword": "unused_retention_period_option",
+				"propertyTooltip": "Defines the retention period for a table or table partitions in seconds.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Record commit timestamp clause",
+				"propertyKeyword": "record_commit_timestamp_clause",
+				"propertyTooltip": "Specifies that the COMMIT timestamp of a row is tracked. If this option is enabled, then every row is associated with the COMMIT timestamp of the last transaction that performed a DML operation on the row.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false,
+				"dependency": {
+					"type": "or",
+					"values": [
+						{
+							"key": "temporary",
+							"value": "global"
+						},
+						{
+							"key": "temporary",
+							"value": "local"
+						},
+						{
+							"type": "not",
+							"values": {
+								"key": "tableType",
+								"value": "virtual"
+							}
+						}
+					]
+				}
+			},
+			{
+				"propertyName": "NUMA node preference clause",
+				"propertyKeyword": "numa_node_preference_clause",
+				"propertyTooltip": "Sets the NUMA node preferences. This clause can be set in various locations such as range partition definitions (not hash or round-robin) and column definitions.",
+				"propertyType": "details",
+				"template": "textarea",
+				"markdown": false
+			},
+			{
+				"propertyName": "Loadable unit",
+				"propertyKeyword": "load_unit",
+				"propertyTooltip": "Specifies whether or not logging was on for the table at last restart time",
+				"propertyType": "select",
+				"options": [
+					"",
+					"column",
+					"page"
 				]
 			},
 			{
