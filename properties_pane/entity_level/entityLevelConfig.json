@@ -564,69 +564,9 @@ making sure that you maintain a proper JSON format.
 					{
 						"propertyName": "Activated",
 						"propertyKeyword": "isActivated",
-						"propertyTooltip": "Deactivated item will be not included in FE script",
+						"propertyTooltip": "Deactivated item will be not included in DDL script.",
 						"propertyType": "checkbox",
 						"defaultValue": true
-					},
-					{
-						"propertyName": "Type",
-						"propertyKeyword": "indxType",
-						"propertyType": "select",
-						"options": ["", "unique"]
-					},
-					{
-						"propertyName": "Keys",
-						"propertyKeyword": "indxKey",
-						"propertyType": "fieldList",
-						"template": "orderedList",
-						"attributeList": ["asc", "desc", "random"]
-					},
-					{
-						"propertyName": "Include keys",
-						"propertyKeyword": "indxIncludeKey",
-						"propertyType": "fieldList",
-						"propertyTooltip": "Introduces a clause that specifies additional columns to be appended to the set of index key columns. Any columns included with this clause are not used to enforce uniqueness.",
-						"template": "orderedList",
-						"attributeList": [],
-						"dependency": {
-							"type": "and",
-							"values": [
-								{
-									"key": "indxType",
-									"value": "unique"
-								},
-								{
-									"type": "not",
-									"values": [
-										{
-											"level": "parent",
-											"key": "temporary",
-											"value": true
-										}
-									]
-								}
-							]
-						}
-					},
-					{
-						"propertyName": "Compress",
-						"propertyKeyword": "indxCompress",
-						"propertyType": "select",
-						"propertyTooltip": "Specifies whether index compression is enabled.",
-						"options": ["", "yes", "no"]
-					},
-					{
-						"propertyName": "Null keys",
-						"propertyKeyword": "indxNullKeys",
-						"propertyType": "select",
-						"propertyTooltip": "'Include' specifies that an index entry is created when all parts of the index key contain the null value.",
-						"options": ["", "include", "exclude"]
-					},
-					{
-						"propertyName": "Tablespace",
-						"propertyKeyword": "indxTablespace",
-						"propertyTooltip": "Specify the tablespace in which Db2 Database creates the table. If you omit TABLESPACE, then the database creates that item in the default tablespace of the owner of the schema containing the table.",
-						"propertyType": "text"
 					},
 					{
 						"propertyName": "Description",
@@ -638,7 +578,80 @@ making sure that you maintain a proper JSON format.
 							"editorDialect": "markdown"
 						}
 					},
-
+					{
+						"propertyName": "Unique",
+						"propertyKeyword": "uniqueIndex",
+						"propertyTooltip": "Specifies that the index must have unique values.",
+						"propertyType": "checkbox"
+					},
+/* Not sure to know how to make this work, depending on the table type
+*/
+					{
+						"propertyName": "Type",
+						"propertyKeyword": "rs_tree_type_index",
+						"propertyTooltip": "Specifies the tree type for the index. Tree type specification is only applicable to row store tables.",
+						"propertyType": "select",
+						"options": ["","btree","cpbtree"],
+						"dependency": {
+							"level": "parent",
+							"key": "tableType",
+							"value": "row"
+						}
+					},
+					{
+						"propertyName": "Type",
+						"propertyKeyword": "cs_inverted_type_index",
+						"propertyTooltip": "Specifies the inverted index type for column store tables. Inverted index types are only applicable to column store tables.",
+						"propertyType": "select",
+						"options": ["","inverted hash","inverted value", "inverted individual"],
+						"dependency": {
+							"level": "parent",
+							"key": "tableType",
+							"value": "column"
+						}
+					},
+					{
+						"propertyName": "Load unit",
+						"propertyKeyword": "load_unit",
+						"propertyTooltip": "Specifies the load unit for the index. ",
+						"propertyType": "select",
+						"options": ["","column","page"],
+						"dependency": {
+							"key": "cs_inverted_type_index",
+							"value": "inverted value"
+						}
+					},
+					{
+						"propertyName": "Keys",
+						"propertyKeyword": "indxKey",
+						"propertyType": "fieldList",
+						"template": "orderedList",
+						"attributeList": ["asc", "desc"]
+					},
+					{
+						"propertyName": "Fill factor",
+						"propertyKeyword": "fillfactor",
+						"propertyTooltip": "Specifies how each node of a new index is filled. It is a percentage value of integer from 50 to 100, and the default value is 90.",
+						"propertyType": "numeric",
+						"valueType": "number",
+						"allowNegative": false,
+						"step": 1,
+						"minValue": 50,
+						"maxValue": 100,
+						"step": 1
+					},
+					{
+						"propertyName": "No wait",
+						"propertyKeyword": "nowait",
+						"propertyTooltip": "Specifies that the CREATE INDEX statement returns an error immediately in case a table lock cannot be acquired.",
+						"propertyType": "checkbox"
+					},
+					{
+						"propertyName": "Onine",
+						"propertyKeyword": "online",
+						"propertyTooltip": "For column store tables, the ONLINE keyword allows the creation of the index without placing an exclusive lock on the table. This is only supported for non-replicated, non-history tables.  For row store tables, you can specify ONLINE to not place an exclusive lock on the table and enable read access during index creation.",
+						"propertyType": "checkbox"
+					},
 					{
 						"propertyName": "Comments",
 						"propertyKeyword": "indxComments",
